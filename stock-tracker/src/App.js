@@ -24,7 +24,7 @@ callStocks() {
   const url = 'https://ws-api.iextrading.com/1.0/tops'
   const socket = require('socket.io-client')(url)
   socket.on('message', message => this.setState({
-    respData: message
+    respData: JSON.parse(message)
   }))
   socket.on('connect', () => {
     socket.emit('subscribe', 'snap');
