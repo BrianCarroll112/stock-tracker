@@ -4,19 +4,42 @@ import {
   getIEX,
   getAV
 } from './services/fetchData';
+import DisplayData from './components/DisplayData';
+import getStockInfo from './services/websocket.js';
+import openSocket from 'socket.io-client';
 
 class App extends Component {
+  constructor(){
+    super()
+    this.state = {
+      respData: {empty: 'object'}
+    }
+  }
 
-  async componentDidMount(){
-    const respIEX = await getIEX();
-    const respAV = await getAV();
+  respCallback(data) {
+    console.log(data);
+  }
 
-    console.log(respIEX, respAV)
+callStocks() {
+  const url = 'https://ws-api.iextrading.com/1.0/tops'
+  const socket = require('socket.io-client')(url)
+  socket.on('message', message => this.setState({
+    respData: message
+  }))
+  socket.on('connect', () => {
+    socket.emit('subscribe', 'snap');
+  })
+}
+
+ componentDidMount() {
+  this.callStocks();
   }
 
   render() {
     return (
       <div className="App">
+        <h1>Socket Test</h1>
+        <DisplayData data={this.state.respData} />
         <h1>quickStocks</h1>
         <h3>Description</h3>
         <p>quickStocks is meant to give users a hub for all things stock. A user may search for stocks and add/remove tickers to a collection. All stocks in a user's collection will continously update with the latest price and percent up or down for the day. A user may view more information on a stock including a real time graph with multiple data settings (timeframe, technical indicators, etc)</p>
