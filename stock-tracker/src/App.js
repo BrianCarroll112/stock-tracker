@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import './App.css';
 import StockList from './components/StockList';
 import Navbar from './components/Navbar'
+import Welcome from './components/Welcome'
+import Details from './components/Details'
 
 class App extends Component {
   constructor(){
@@ -16,7 +18,8 @@ class App extends Component {
     return (
       <div className="App">
         <Navbar />
-        <h1>Your Stocks</h1>
+        <Welcome />
+        <Details />
         <StockList tickers={this.state.tickers} />
       </div>
     );

@@ -1,5 +1,13 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 export default () => (
-  <div>NAV</div>
+  <header>
+    <nav>
+      <Link to="/MyStocks">My Stocks</Link>
+      <Link to="/Details">Details</Link>
+      <Link to="/ipo">Upcoming IPO's</Link>
+      <Link to="/movers">Today's Big Movers</Link>
+    </nav>
+  </header>
 )
