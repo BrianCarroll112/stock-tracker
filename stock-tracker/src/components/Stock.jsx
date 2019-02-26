@@ -12,7 +12,7 @@ class Stock extends Component {
     const url = 'https://ws-api.iextrading.com/1.0/tops'
     const socket = require('socket.io-client')(url)
     socket.on('message', message => {
-      console.log(this.props.ticker, this.state)
+      console.log(this.props.ticker, message)
       this.setState({
         respData: JSON.parse(message)
     })})
@@ -28,8 +28,10 @@ class Stock extends Component {
   render() {
     return(
       <div className="stock-row">
-        <p>{this.props.ticker}</p> <p>Last Price: {this.state.respData.lastSalePrice}</p>
-      </div>
+        <h3>{this.props.ticker}</h3> <p>Last: {this.state.respData.lastSaleSize} @ {this.state.respData.lastSalePrice}</p>
+        <p>Ask: {this.state.respData.askSize} @ {this.state.respData.askPrice}</p>
+        <p>Bid: {this.state.respData.bidSize} @ {this.state.respData.bidPrice}</p>
+    </div>
     )
   }
 }
