@@ -5,8 +5,8 @@ export default (props) => {
   return(
     <div>
       <h1>My Stocks</h1>
-      {props.tickers.map(e => (
-        <Stock key={e} ticker={e} />
+      {Object.keys(props.stockList).map(e => (
+        <Stock key={e} ticker={e} stockInfo={props.stockList[e]} />
       ))}
     </div>
   )
