@@ -1,21 +1,23 @@
 import React, { Component } from 'react';
 import './App.css';
-import DisplayData from './components/DisplayData';
+import StockList from './components/StockList';
+import Navbar from './components/Navbar'
 
 class App extends Component {
   constructor(){
     super()
 
     this.state = {
-      tickers: ['aapl', 'snap', 'amd', 'drys', 'fb']
+      tickers: ['aapl', 'snap', 'amd', 'msft', 'fb']
     };
   }
 
   render() {
     return (
       <div className="App">
+        <Navbar />
         <h1>Your Stocks</h1>
-        <DisplayData tickers={this.state.tickers}/>
+        <StockList tickers={this.state.tickers} />
       </div>
     );
   }

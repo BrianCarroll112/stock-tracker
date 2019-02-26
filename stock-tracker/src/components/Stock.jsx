@@ -8,11 +8,11 @@ class Stock extends Component {
       respData: {}
     }
   }
-  callStocks(stock) {
+
+  getStockFeed(stock) {
     const url = 'https://ws-api.iextrading.com/1.0/tops'
     const socket = require('socket.io-client')(url)
     socket.on('message', message => {
-      console.log(this.props.ticker, message)
       this.setState({
         respData: JSON.parse(message)
     })})
@@ -22,7 +22,7 @@ class Stock extends Component {
   }
 
   componentDidMount(){
-    this.callStocks(this.props.ticker)
+    this.getStockFeed(this.props.ticker)
   }
 
   render() {
