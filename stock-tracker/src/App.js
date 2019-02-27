@@ -6,21 +6,33 @@ import Welcome from './components/Welcome';
 import Details from './components/Details';
 import { Route } from 'react-router-dom';
 import { withRouter } from 'react-router';
-
+import {
+  fetchIpoData,
+  fetchMoverData,
+  fetchDetailData } from './services/fetchData';
+import CompanyDetails from './components/CompanyDetails';
 
 class App extends Component {
-  constructor(){
-    super()
+  constructor(props){
+    super(props)
 
     this.state = {
       tickers: [],
       socket: {},
       stockList: {},
-      inputVal: ''
+      inputVal: '',
+      companyData: {},
+      ipoData: [],
+      moverData: {},
     };
+
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleSubmitForDesc = this.handleSubmitForDesc.bind(this);
     this.removeStockFromFeed = this.removeStockFromFeed.bind(this);
+    this.getCompanyData = this.getCompanyData.bind(this);
+    this.getMoverData = this.getMoverData.bind(this);
+    this.getIpoData = this.getIpoData.bind(this);
   }
 
   getStockFeed(stock) {
@@ -80,8 +92,38 @@ class App extends Component {
     })
   }
 
+  handleSubmitForDesc(e){
+    e.preventDefault();
+    this.props.history.replace('/details/' + this.state.inputVal);
+    this.setState({
+      inputVal: ''
+    })
+  }
+
+  async getCompanyData(stock){
+    const companyData = await fetchDetailData(stock);
+    this.setState({
+      companyData
+    })
+  }
+  async getIpoData(){
+    const ipoData = await fetchIpoData();
+    this.setState({
+      ipoData
+    })
+  }
+  async getMoverData(stock){
+    const moverData = await fetchMoverData();
+    this.setState({
+      moverData
+    })
+  }
+
   componentDidMount(){
-    this.getStockFeed('aapl')
+    this.getStockFeed('aapl');
+    this.getCompanyData('amd'); //implement in companydetails
+    this.getMoverData();
+    this.getIpoData();
   }
 
   render() {
@@ -90,13 +132,25 @@ class App extends Component {
         <Navbar />
         <Route exact path="/" render={Welcome} />
         <Route path="/details" render={(props) => (
-            <Details {...props} />
+            <Details {...props}
+              handleChange={this.handleChange}
+              inputVal={this.state.inputVal}
+              handleSubmitForDesc={this.handleSubmitForDesc}/>
           )} />
+        <Route path="/details/:stock" render={(props) => {
+            return(
+              <CompanyDetails {...props}
+                getCompanyData={this.getCompanyData}
+                companyData={this.state.companyData} />
+            )
+          }}
+          />
         <Route path="/MyStocks" render={(props) =>{
             return(
               <StockList
                 {...props}
                 handleSubmit={this.handleSubmit}
+                handleSubmitForDesc={this.handleSubmitForDesc}
                 handleChange={this.handleChange}
                 inputVal={this.state.inputVal}
                 stockList={this.state.stockList}
