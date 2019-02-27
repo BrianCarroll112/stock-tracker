@@ -5,9 +5,13 @@ class BigMovers extends Component {
     super(props)
   }
 
+  componentDidMount(){
+    this.props.getMoverData();
+  }
+
   render(){
     return(
-      <p>{JSON.stringify(this.props.moverData)}</p>    
+      <p>{JSON.stringify(this.props.moverData)}</p>
     )
   }
 }

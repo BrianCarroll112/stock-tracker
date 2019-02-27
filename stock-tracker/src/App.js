@@ -109,12 +109,20 @@ class App extends Component {
     })
   }
   async getIpoData(){
-    const ipoData = await fetchIpoData();
-    console.log(ipoData)
+    const ipoFullData = await fetchIpoData();
+    const ipoData = ipoFullData.viewData.map((e, i) => {
+      return (
+        {...e,
+          ...ipoFullData.rawData[i]
+        }
+      );
+    });
+    
     this.setState({
       ipoData
     })
   }
+
   async getMoverData(stock){
     const moverData = await fetchMoverData();
     console.log(moverData)
@@ -126,8 +134,6 @@ class App extends Component {
   componentDidMount(){
     this.getStockFeed('aapl');
     this.getCompanyData('amd'); //implement in companydetails
-    this.getMoverData();
-    this.getIpoData();
   }
 
   render() {

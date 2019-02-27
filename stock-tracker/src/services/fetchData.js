@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const fetchDetailData = async (stock) => {
-  const resp = await axios(`https://api.iextrading.com/1.0/stock/${stock}/batch?types=quote,news,chart,company&range=1m&last=10`)
+  const resp = await axios(`https://api.iextrading.com/1.0/stock/${stock}/batch?types=relevant,logo,news,chart,company&range=1m&last=10`)
   return resp.data
 }
 const fetchIpoData = async () => {

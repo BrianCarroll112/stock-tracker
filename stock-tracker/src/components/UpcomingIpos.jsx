@@ -5,7 +5,11 @@ class UpcomingIpos extends Component {
     super(props)
   }
 
-  render(){
+  componentDidMount(){
+    this.props.getIpoData();
+  }
+
+  render(){  
     return(
       <p>{JSON.stringify(this.props.ipoData)}</p>
     )
