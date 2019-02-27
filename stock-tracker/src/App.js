@@ -12,7 +12,7 @@ import {
   fetchDetailData } from './services/fetchData';
 import CompanyDetails from './components/CompanyDetails';
 import BigMovers from './components/BigMovers';
-import UpcomingIpos from './components/UpcomingIpos'
+import UpcomingIpos from './components/UpcomingIpos';
 
 class App extends Component {
   constructor(props){
@@ -110,12 +110,14 @@ class App extends Component {
   }
   async getIpoData(){
     const ipoData = await fetchIpoData();
+    console.log(ipoData)
     this.setState({
       ipoData
     })
   }
   async getMoverData(stock){
     const moverData = await fetchMoverData();
+    console.log(moverData)
     this.setState({
       moverData
     })

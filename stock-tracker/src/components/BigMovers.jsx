@@ -1,7 +1,15 @@
 import React, { Component } from 'react';
 
-//class components for component didmount data pull
+class BigMovers extends Component {
+  constructor(props){
+    super(props)
+  }
 
-export default (props) => (
-  <p>{JSON.stringify(props.moverData)}</p>
-)
+  render(){
+    return(
+      <p>{JSON.stringify(this.props.moverData)}</p>    
+    )
+  }
+}
+
+export default BigMovers;

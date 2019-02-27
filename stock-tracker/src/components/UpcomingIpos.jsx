@@ -1,7 +1,15 @@
 import React, { Component } from 'react';
 
-//class components for component didmount data pull
+class UpcomingIpos extends Component {
+  constructor(props){
+    super(props)
+  }
 
-export default (props) => (
-  <p>{JSON.stringify(props.ipoData)}</p>
-)
+  render(){
+    return(
+      <p>{JSON.stringify(this.props.ipoData)}</p>
+    )
+  }
+}
+
+export default UpcomingIpos;
