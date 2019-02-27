@@ -11,6 +11,8 @@ import {
   fetchMoverData,
   fetchDetailData } from './services/fetchData';
 import CompanyDetails from './components/CompanyDetails';
+import BigMovers from './components/BigMovers';
+import UpcomingIpos from './components/UpcomingIpos'
 
 class App extends Component {
   constructor(props){
@@ -129,14 +131,17 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+
         <Navbar />
         <Route exact path="/" render={Welcome} />
+
         <Route path="/details" render={(props) => (
             <Details {...props}
               handleChange={this.handleChange}
               inputVal={this.state.inputVal}
               handleSubmitForDesc={this.handleSubmitForDesc}/>
           )} />
+
         <Route path="/details/:stock" render={(props) => {
             return(
               <CompanyDetails {...props}
@@ -145,7 +150,8 @@ class App extends Component {
             )
           }}
           />
-        <Route path="/MyStocks" render={(props) =>{
+
+        <Route path="/MyStocks" render={(props) => {
             return(
               <StockList
                 {...props}
@@ -158,6 +164,26 @@ class App extends Component {
                 />
             )
           }} />
+
+        <Route path="/ipo" render={(props) => {
+            return(
+              <UpcomingIpos
+                {...props}
+                getIpoData={this.getIpoData}
+                ipoData={this.state.ipoData}
+                />
+            )
+          }} />
+
+        <Route path="/movers" render={(props) => {
+              return(
+                <BigMovers
+                  {...props}
+                  getMoverData={this.getMoverData}
+                  moverData={this.state.moverData}
+                  />
+              )
+            }} />
 
       </div>
     );

@@ -1,3 +1,7 @@
-p, li{
+/* p, li{
   width: 60%;
+} */
+
+a {
+  margin-right: 10px;
 }
