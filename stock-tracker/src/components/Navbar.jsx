@@ -6,8 +6,8 @@ export default () => (
     <nav>
       <Link to="/MyStocks">My Stocks</Link>
       <Link to="/details">Details</Link>
+      <Link to="/movers">Movers</Link>
       <Link to="/ipo">Upcoming IPO's</Link>
-      <Link to="/movers">Today's Big Movers</Link>
     </nav>
   </header>
 )
