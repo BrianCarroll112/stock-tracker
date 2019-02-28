@@ -1,68 +1,92 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# quickStocks
 
-## Available Scripts
 
-In the project directory, you can run:
+## Project Description
 
-### `npm start`
+quickStocks is meant to give users a hub for all things stock. A user may search for stocks and add/remove tickers to a collection. All stocks in a user's collection will continously update with the latest price and percent up or down for the day. A user may view more information on a stock including news, related tickers, and a price chart with several settings.
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+## Wireframes
 
-### `npm test`
+Link to Wireframes.
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### MVP/PostMVP
 
-### `npm run build`
+#### MVP
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- Ability to add/remove stocks to/from collection
+- View realtime price data
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+#### PostMVP EXAMPLE
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- More Details page including news, chart, relevant companies.
+- Movers page showing IEX's gainers and losers list endpoints.
+- Upcoming IPO page from IEX ipo endpoint displaying relevant information on the companies.
+- Interconnectivity between pages - see details from list, add to list from details, both from movers.
 
-### `npm run eject`
+## React Component Hierarchy
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Define the the React components and the architectural design of your app.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Additional Libraries
+- ReactChartkick and Chart.js for displaying graph in details page
+- socket.io to connect to IEX websocket
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## Code Snippet
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+I wanted to display the stock data on your list in real time. To do this I researched websockets and utilized IEX's compatibility with socket.io.
 
-## Learn More
+```
+getStockFeed(stock) {
+  const url = 'https://ws-api.iextrading.com/1.0/tops'
+  const socket = require('socket.io-client')(url)
+  socket.on('message', message => {
+    const stockDataObj = JSON.parse(message);
+    const currentTicker = stockDataObj.symbol;
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+    this.setState(prevState => ({
+      tickers: [...prevState.tickers, currentTicker],
+      stockList: {
+        ...prevState.stockList,
+        [currentTicker]: stockDataObj
+      }}));
+  });
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+  socket.on('connect', () => {
+    socket.emit('subscribe', stock);
+  })
+  this.setState({
+    socket: socket
+  })
+}
 
-### Code Splitting
+addStockToFeed(stock) {
+  this.state.socket.emit('subscribe', stock)
+}
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+async removeStockFromFeed(stock) {
+  await this.state.socket.emit('unsubscribe', stock)
+  this.setState(prevState => {
+    const stockList = Object.keys(prevState.stockList).reduce((object,key) => {
+      if (key !== stock) {
+        object[key] = prevState.stockList[key]
+      }
+      return object
+    }, {});
+    return ({
+      stockList
+    })
+  })
+}
 
-### Analyzing the Bundle Size
+```
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+## Issues and Resolutions
+ Use this section to list of all major issues encountered and their resolution.
 
-### Making a Progressive Web App
+#### SAMPLE.....
+**PROBLEM**: Chart staying with previous company data when changing to new company view                              
+**RESOLUTION**: Use method for setting chart state within input submits and relevant ticker onClicks
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+**PROBLEM**: Didn't want to make tons of API calls on intervals to keep stockdata up to date
+**RESOLUTION**: Learned websockets
