@@ -5,5 +5,9 @@ import Chart from 'chart.js'
 ReactChartkick.addAdapter(Chart)
 
 export default (props) => (
-  <LineChart data={{"2017-01-01": 11, "2017-01-02": 5}} />
+  <LineChart
+    curve={false}
+    messages={{empty: "No data"}}
+    data={props.data}
+    width="60%" />
   )

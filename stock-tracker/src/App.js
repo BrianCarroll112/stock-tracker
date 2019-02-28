@@ -7,6 +7,7 @@ import Details from './components/Details';
 import { Route } from 'react-router-dom';
 import { withRouter } from 'react-router';
 import {
+  fetchChartData,
   fetchIpoData,
   fetchMoverData,
   fetchDetailData } from './services/fetchData';
@@ -29,6 +30,8 @@ class App extends Component {
         gainers: [],
         losers: []
       },
+      chartData: {},
+      selectChart: ''
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -39,6 +42,7 @@ class App extends Component {
     this.getCompanyData = this.getCompanyData.bind(this);
     this.getMoverData = this.getMoverData.bind(this);
     this.getIpoData = this.getIpoData.bind(this);
+    this.getChartData = this.getChartData.bind(this);
   }
 
   getStockFeed(stock) {
@@ -119,6 +123,23 @@ class App extends Component {
     })
   }
 
+  async getChartData(stock, option) {
+    const chartDataResp = await fetchChartData(stock, option);
+    const chartData = {};
+    if (option === "1d"){
+      chartDataResp.forEach(e => {
+        chartData[e.label] = e.close
+      })
+    } else {
+    chartDataResp.forEach(e => {
+      chartData[e.date] = e.close
+    })}
+
+    this.setState({
+      chartData
+    })
+  }
+
   async getIpoData(){
     const ipoFullData = await fetchIpoData();
     const ipoData = ipoFullData.viewData.map((e, i) => {
@@ -167,7 +188,12 @@ class App extends Component {
               <CompanyDetails {...props}
                 getCompanyData={this.getCompanyData}
                 companyData={this.state.companyData}
-                showRelevant={this.handleRelevantClick}/>
+                showRelevant={this.handleRelevantClick}
+                getChartData={this.getChartData}
+                chartData={this.state.chartData}
+                handleChange={this.handleChange}
+                selectedChart={this.state.selectChart}
+                />
             )
           }}
           />

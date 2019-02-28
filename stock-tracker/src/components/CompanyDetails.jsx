@@ -33,7 +33,7 @@ class CompanyDetails extends Component {
         showRelevant: !prevState.showRelevant
       }
     ))
-  }
+ }
 
   render(){
     const { symbol, companyName, CEO, description, exchange, industry, sector, website } = this.props.companyData.company;
@@ -50,11 +50,26 @@ class CompanyDetails extends Component {
       <div className="chart-container-div">
         <h3>Chart <button onClick={() => this.toggleChart()}>Show/Hide</button></h3>
         {this.state.showChart && (
-          // input to set state here to data obj for chart using onsubmit api call w companydata.symbol and chart input
-          //chart - import libraries, etc. or make own component and incl input based api calls for chart endpoint
           <div className="chart-div">
-            <p>input</p>
-            <Chart data={this.props.companyData.chart} />
+            <form onSubmit={e => {
+                e.preventDefault()
+                this.props.getChartData(symbol, this.props.selectedChart)
+                }} >
+              <select
+                name="selectChart"
+                onChange={this.props.handleChange}
+                value={this.props.selectChart}>
+                  <option value="1d">1d</option>
+                  <option value="1m">1m</option>
+                  <option value="3m">3m</option>
+                  <option value="6m">6m</option>
+                  <option value="1y">1y</option>
+                  <option value="2y">2y</option>
+                  <option value="5y">5y</option>
+              </select>
+              <input type="submit" />
+            </form>
+            <Chart data={this.props.chartData} />
           </div>
         )}
       </div>
