@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import NewsItem from './NewsItem'
+import NewsItem from './NewsItem';
+import Chart from './Chart';
 
 class CompanyDetails extends Component {
   constructor(props){
@@ -49,8 +50,12 @@ class CompanyDetails extends Component {
       <div className="chart-container-div">
         <h3>Chart <button onClick={() => this.toggleChart()}>Show/Hide</button></h3>
         {this.state.showChart && (
-            <p>chartdata</p>
-            //chart - import libraries, etc. or make own component and incl input based api calls for chart endpoint
+          // input to set state here to data obj for chart using onsubmit api call w companydata.symbol and chart input
+          //chart - import libraries, etc. or make own component and incl input based api calls for chart endpoint
+          <div className="chart-div">
+            <p>input</p>
+            <Chart data={this.props.companyData.chart} />
+          </div>
         )}
       </div>
       <div className="news-container-div">

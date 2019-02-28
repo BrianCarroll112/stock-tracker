@@ -6,7 +6,7 @@ class BigMovers extends Component {
   calcPercent(e){
     const open = e.open;
     const current = e.latestPrice;
-    return ((current - open) / open).toFixed(4);
+    return ((current - open) / open * 100).toFixed(3);
   }
 
   componentDidMount(){
