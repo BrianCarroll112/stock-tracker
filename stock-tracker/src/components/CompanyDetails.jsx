@@ -58,7 +58,9 @@ class CompanyDetails extends Component {
               <select
                 name="selectChart"
                 onChange={this.props.handleChange}
-                value={this.props.selectChart}>
+                defaultValue="1m"
+                value={this.props.selectChart}
+                >
                   <option value="1d">1d</option>
                   <option value="1m">1m</option>
                   <option value="3m">3m</option>
@@ -87,7 +89,10 @@ class CompanyDetails extends Component {
             <p>{this.props.companyData.relevant.symbols.map(e => (
                 <span
                   key={e}
-                  onClick={() => this.props.showRelevant(e)}
+                  onClick={() => {
+                    this.props.showRelevant(e)
+                    this.props.getChartData(e, this.props.selectedChart);
+                  }}
                   className="relevant-ticker"
                   >
                   {e}

@@ -31,7 +31,7 @@ class App extends Component {
         losers: []
       },
       chartData: {},
-      selectChart: ''
+      selectChart: '1m'
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -104,8 +104,9 @@ class App extends Component {
 
   async handleSubmitForDesc(e){
     e.preventDefault();
-    this.props.history.replace('/details/' + this.state.inputVal);
-    await this.getCompanyData(this.state.inputVal);
+    await this.props.history.replace('/details/' + this.state.inputVal);
+    this.getCompanyData(this.state.inputVal);
+    this.getChartData(this.state.inputVal, this.state.selectChart);
     this.setState({
       inputVal: ''
     })
