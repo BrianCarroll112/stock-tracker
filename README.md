@@ -83,9 +83,7 @@ async removeStockFromFeed(stock) {
 ```
 
 ## Issues and Resolutions
- Use this section to list of all major issues encountered and their resolution.
 
-#### SAMPLE.....
 **PROBLEM**: Chart staying with previous company data when changing to new company view                              
 **RESOLUTION**: Use method for setting chart state within input submits and relevant ticker onClicks
 
