@@ -6,14 +6,32 @@ class CompanyDetails extends Component {
     super(props);
 
     this.state={
-      showChart: true,
-      showNews: true,
-      showRelevant: true
+      showChart: false,
+      showNews: false,
+      showRelevant: false
     }
   }
 
-  componentDidMount() {
-    // set all shows to false? unless remount will reset them to coded value
+  toggleChart(){
+    this.setState(prevState => (
+      {
+        showChart: !prevState.showChart
+      }
+    ))
+  }
+  toggleNews(){
+    this.setState(prevState => (
+      {
+        showNews: !prevState.showNews
+      }
+    ))
+  }
+  toggleRelevant(){
+    this.setState(prevState => (
+      {
+        showRelevant: !prevState.showRelevant
+      }
+    ))
   }
 
   render(){
@@ -29,21 +47,22 @@ class CompanyDetails extends Component {
           <p>{description}</p>
         </div>
       <div className="chart-container-div">
+        <h3>Chart <button onClick={() => this.toggleChart()}>Show/Hide</button></h3>
         {this.state.showChart && (
-            <h3>Chart</h3>
+            <p>chartdata</p>
             //chart - import libraries, etc. or make own component and incl input based api calls for chart endpoint
         )}
       </div>
       <div className="news-container-div">
-        <h3>News</h3>
+        <h3>News <button onClick={() => this.toggleNews()}>Show/Hide</button></h3>
         {this.state.showNews && (
           this.props.companyData.news.map(e => (
-            <NewsItem key= {e.datetime} news={e} />
+            <NewsItem key={e.datetime} news={e} />
           ))
         )}
         </div>
         <div className="relevant-conatiner-div">
-          <h3>Relevant Tickers (click)</h3>
+          <h3>Relevant Tickers (click one) <button onClick={() => this.toggleRelevant()}>Show/Hide</button></h3>
           {this.state.showRelevant && (
             <p>{this.props.companyData.relevant.symbols.map(e => (
                 <span
@@ -61,4 +80,4 @@ class CompanyDetails extends Component {
   }
 }
 
-export default CompanyDetails
+export default CompanyDetails;
