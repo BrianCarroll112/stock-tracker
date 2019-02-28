@@ -163,6 +163,16 @@ class App extends Component {
       moverData
     })
   }
+  
+//style
+ async handleActiveButtonColor(e){
+    const clicked = e.target;
+    const buttons = document.querySelectorAll('li a');
+    await buttons.forEach((but) => {
+      but.style.backgroundColor = '#181818'
+    })
+    clicked.style.backgroundColor = '#505050';
+  }
 
   componentDidMount(){
     this.getStockFeed('aapl');
@@ -173,7 +183,7 @@ class App extends Component {
     return (
       <div className="App">
 
-        <Navbar />
+        <Navbar handleActiveButtonColor={this.handleActiveButtonColor}/>
         <Route exact path="/" render={Welcome} />
 
         <Route path="/details" render={(props) => (

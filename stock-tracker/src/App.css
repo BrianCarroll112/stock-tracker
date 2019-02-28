@@ -1,11 +1,35 @@
-p, li{
-  width: 60%;
-}
-
-a {
-  margin-right: 10px;
+body {
+  margin:0;
+  background: #505050;
+  color: white;
 }
 
 .relevant-ticker {
   margin-right:10px;
+}
+
+/* Navbar */
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  text-decoration:none;
+  display:flex;
+  justify-content: center;
+  background: #181818;
+}
+
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  border-right: 1px solid #343434;
+}
+
+li a:hover:not(.active) {
+  background: #343434;
 }
