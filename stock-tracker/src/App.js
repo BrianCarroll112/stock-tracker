@@ -34,6 +34,7 @@ class App extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleSubmitForDesc = this.handleSubmitForDesc.bind(this);
+    this.handleRelevantClick = this.handleRelevantClick.bind(this);
     this.removeStockFromFeed = this.removeStockFromFeed.bind(this);
     this.getCompanyData = this.getCompanyData.bind(this);
     this.getMoverData = this.getMoverData.bind(this);
@@ -97,12 +98,18 @@ class App extends Component {
     })
   }
 
-  handleSubmitForDesc(e){
+  async handleSubmitForDesc(e){
     e.preventDefault();
     this.props.history.replace('/details/' + this.state.inputVal);
+    await this.getCompanyData(this.state.inputVal);
     this.setState({
       inputVal: ''
     })
+  }
+
+  async handleRelevantClick(e){
+    this.props.history.replace('/details/' + e);
+    await this.getCompanyData(e)
   }
 
   async getCompanyData(stock){
@@ -137,7 +144,7 @@ class App extends Component {
 
   componentDidMount(){
     this.getStockFeed('aapl');
-    this.getCompanyData('amd'); //implement in companydetails
+    this.getCompanyData('amd');
   }
 
   render() {
@@ -151,14 +158,16 @@ class App extends Component {
             <Details {...props}
               handleChange={this.handleChange}
               inputVal={this.state.inputVal}
-              handleSubmitForDesc={this.handleSubmitForDesc}/>
+              handleSubmitForDesc={this.handleSubmitForDesc}
+              getCompanyData={this.getCompanyData}/>
           )} />
 
         <Route path="/details/:stock" render={(props) => {
             return(
               <CompanyDetails {...props}
                 getCompanyData={this.getCompanyData}
-                companyData={this.state.companyData} />
+                companyData={this.state.companyData}
+                showRelevant={this.handleRelevantClick}/>
             )
           }}
           />
