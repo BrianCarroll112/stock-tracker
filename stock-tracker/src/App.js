@@ -25,7 +25,10 @@ class App extends Component {
       inputVal: '',
       companyData: {},
       ipoData: [],
-      moverData: {},
+      moverData: {
+        gainers: [],
+        losers: []
+      },
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -108,6 +111,7 @@ class App extends Component {
       companyData
     })
   }
+
   async getIpoData(){
     const ipoFullData = await fetchIpoData();
     const ipoData = ipoFullData.viewData.map((e, i) => {
@@ -117,15 +121,15 @@ class App extends Component {
         }
       );
     });
-    
+
     this.setState({
       ipoData
     })
   }
 
-  async getMoverData(stock){
+  async getMoverData(){
     const moverData = await fetchMoverData();
-    console.log(moverData)
+
     this.setState({
       moverData
     })
