@@ -12,9 +12,8 @@ class BigMovers extends Component {
     return ((current - open) / open).toFixed(4);
   }
 
-  async componentDidMount(){
-    await this.props.getMoverData();
-    console.log(this.props.moverData);
+  componentDidMount(){
+    this.props.getMoverData();
   }
 
   render(){

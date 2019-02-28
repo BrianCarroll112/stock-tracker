@@ -6,16 +6,15 @@ class UpcomingIpos extends Component {
     super(props)
   }
 
-  async componentDidMount(){
-    await this.props.getIpoData();
-    console.log(this.props.ipoData)
+  componentDidMount(){
+    this.props.getIpoData();
   }
 
   render(){
     return(
       <div className="ipo-container-div">
         {this.props.ipoData.map(e => (
-          <Ipo company={e} />
+          <Ipo key={e.symbol} company={e} />
         ))}
       </div>
     )
