@@ -8,6 +8,11 @@ body {
   margin-right:10px;
 }
 
+.chart-parent {
+  background: white;
+  width: 60%;
+}
+
 /* Navbar */
 
 ul {
@@ -30,6 +35,55 @@ li a {
   border-right: 1px solid #343434;
 }
 
-li a:hover:not(.active) {
+li a:hover {
+  background-color: #343434;
+}
+
+/* welcome page */
+
+.welcome-message {
+  text-align:center;
+}
+
+.welcome-message p {
+  width: 50%;
+  margin: 0 auto;
+}
+
+/* My Stocks */
+
+.stock-list-input {
+  text-align: center;
+}
+.stock-list-container {
+  width:80%;
+  height:60%;
+  margin: 0 auto;
+  margin-left: 10%;
+  margin-right:10%;
+  text-align:left;
+  margin-top: 30px;
+}
+
+.stock-row {
+  display:grid;
+  grid-template-columns: .7fr 1fr 1fr 1fr 1fr;
+}
+.stock-row p {
+  padding-left:10px;
+}
+
+.stock-item-buttons {
+  display:flex;
+  justify-content:center;
+  align-items: center;
+}
+.stock-item-buttons p {
+  width: 70%;
+  height: 70%;
+  text-align:center;
+}
+
+.stock-item-buttons:hover {
   background: #343434;
 }

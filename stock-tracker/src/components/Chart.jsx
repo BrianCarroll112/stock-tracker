@@ -9,5 +9,5 @@ export default (props) => (
     curve={false}
     messages={{empty: "No data"}}
     data={props.data}
-    width="60%" />
+    />
   )

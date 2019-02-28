@@ -163,9 +163,9 @@ class App extends Component {
       moverData
     })
   }
-  
+
 //style
- async handleActiveButtonColor(e){
+ async handleActiveButtonColor(e) {
     const clicked = e.target;
     const buttons = document.querySelectorAll('li a');
     await buttons.forEach((but) => {
@@ -174,9 +174,22 @@ class App extends Component {
     clicked.style.backgroundColor = '#505050';
   }
 
+  handleStockListColors() {
+    const stockRows = document.querySelectorAll('.stock-row');
+    stockRows.forEach((e,i) => {
+      if ( i === 0 || i % 2 === 0 ) {
+        e.style.backgroundColor = '#181818';
+      }
+    })
+  }
+
   componentDidMount(){
     this.getStockFeed('aapl');
     this.getCompanyData('amd');
+  }
+
+  componentDidUpdate(){
+    this.handleStockListColors();
   }
 
   render() {

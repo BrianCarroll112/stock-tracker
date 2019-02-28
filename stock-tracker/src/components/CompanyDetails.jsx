@@ -71,7 +71,9 @@ class CompanyDetails extends Component {
               </select>
               <input type="submit" />
             </form>
-            <Chart data={this.props.chartData} />
+            <div className="chart-parent">
+              <Chart data={this.props.chartData} />
+            </div>
           </div>
         )}
       </div>
