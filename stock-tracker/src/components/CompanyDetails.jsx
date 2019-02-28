@@ -41,7 +41,7 @@ class CompanyDetails extends Component {
         <div className="basic-details">
           <h1> <a href={website} rel="noopener noreferrer" target="_blank" >{companyName}</a> - {symbol} - {exchange}</h1>
           <h3>{CEO}</h3>
-          <img src={this.props.companyData.logo.url} />
+          <img src={this.props.companyData.logo.url} alt={symbol + " logo"} />
           <h5>Sector: {sector}</h5>
           <h5>Industry: {industry}</h5>
           <p>{description}</p>

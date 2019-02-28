@@ -2,9 +2,6 @@ import React, { Component } from 'react';
 import Ipo from './Ipo'
 
 class UpcomingIpos extends Component {
-  constructor(props){
-    super(props)
-  }
 
   componentDidMount(){
     this.props.getIpoData();

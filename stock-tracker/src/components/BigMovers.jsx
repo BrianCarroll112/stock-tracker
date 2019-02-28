@@ -2,9 +2,6 @@ import React, { Component } from 'react';
 import Mover from './Mover'
 
 class BigMovers extends Component {
-  constructor(props){
-    super(props)
-  }
 
   calcPercent(e){
     const open = e.open;

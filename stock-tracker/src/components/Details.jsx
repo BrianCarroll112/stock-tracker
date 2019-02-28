@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 export default (props) => (
-  
+
   <div className="details">
     <form onSubmit={(e) => props.handleSubmitForDesc(e)}>
       <label htmlFor="detailInput">Ticker: </label>
