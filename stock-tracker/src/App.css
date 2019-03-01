@@ -9,7 +9,7 @@ body {
 }
 
 .chart-parent {
-  background: white;
+  background: WhiteSmoke;
   width: 60%;
 }
 
@@ -152,6 +152,10 @@ h1 a:hover, p a:hover {
 }
 .chart-div select {
   margin-right: 10px;
+}
+
+.chart-container-div, .news-container-div, .relevant-container-div {
+  padding-left: 15px;
 }
 
 /* Movers */
