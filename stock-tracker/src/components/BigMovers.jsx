@@ -15,27 +15,31 @@ class BigMovers extends Component {
 
   render(){
     return(
-      <div>
-        <h1>Gainers</h1>
-        <div className="gainers-container-div">
-          {
-            this.props.moverData.gainers.map(e =>(
-            <Mover
-              key={e.symbol}
-              company={e}
-              percent={this.calcPercent(e)}
-               />
-          ))}
+      <div className="movers-outer-div">
+        <div className="gainers-container-outer-div">
+          <h1>Gainers</h1>
+          <div className="gainers-container-div">
+            {
+              this.props.moverData.gainers.map(e =>(
+              <Mover
+                key={e.symbol}
+                company={e}
+                percent={this.calcPercent(e)}
+                 />
+            ))}
+          </div>
         </div>
-        <h2>Losers</h2>
-        <div className="losers-container-div">
-          {this.props.moverData.losers.map(e =>(
-            <Mover
-              key={e.symbol}
-              company={e}
-              percent={this.calcPercent(e)}
-                  />
-          ))}
+        <div className="losers-container-outer-div">
+          <h1>Losers</h1>
+          <div className="losers-container-div">
+            {this.props.moverData.losers.map(e =>(
+              <Mover
+                key={e.symbol}
+                company={e}
+                percent={this.calcPercent(e)}
+                    />
+            ))}
+        </div>
       </div>
     </div>
 

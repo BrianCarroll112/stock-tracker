@@ -48,7 +48,7 @@ class CompanyDetails extends Component {
           <p>{description}</p>
         </div>
       <div className="chart-container-div">
-        <h3>Chart <button onClick={() => this.toggleChart()}>Show/Hide</button></h3>
+        <h2>Chart <button onClick={() => this.toggleChart()}>Show/Hide</button></h2>
         {this.state.showChart && (
           <div className="chart-div">
             <form onSubmit={e => {
@@ -78,29 +78,33 @@ class CompanyDetails extends Component {
         )}
       </div>
       <div className="news-container-div">
-        <h3>News <button onClick={() => this.toggleNews()}>Show/Hide</button></h3>
-        {this.state.showNews && (
-          this.props.companyData.news.map(e => (
-            <NewsItem key={e.datetime} news={e} />
-          ))
-        )}
+        <h2>News <button onClick={() => this.toggleNews()}>Show/Hide</button></h2>
+        <div className="news-container-inner-div">
+          {this.state.showNews && (
+            this.props.companyData.news.map(e => (
+              <NewsItem className="news-item" key={e.datetime} news={e} />
+            ))
+          )}
         </div>
-        <div className="relevant-conatiner-div">
-          <h3>Relevant Tickers (click one) <button onClick={() => this.toggleRelevant()}>Show/Hide</button></h3>
+      </div>
+        <div className="relevant-container-div">
+          <h2>Relevant Tickers <button onClick={() => this.toggleRelevant()}>Show/Hide</button></h2>
           {this.state.showRelevant && (
-            <p>{this.props.companyData.relevant.symbols.map(e => (
-                <span
-                  key={e}
-                  onClick={() => {
-                    this.props.showRelevant(e)
-                    this.props.getChartData(e, this.props.selectedChart);
-                  }}
-                  className="relevant-ticker"
-                  >
-                  {e}
-                </span>))}
-            </p>)
-          }
+            <div className="relevant-container-inner-div">
+              <p>{this.props.companyData.relevant.symbols.map(e => (
+                  <span
+                    key={e}
+                    onClick={() => {
+                      this.props.showRelevant(e)
+                      this.props.getChartData(e, this.props.selectedChart);
+                    }}
+                    className="relevant-ticker"
+                    >
+                    {e}
+                  </span>))}
+              </p>
+            </div>)}
+
         </div>
       </div>
     )

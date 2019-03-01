@@ -55,6 +55,10 @@ li a:hover {
 .stock-list-input {
   text-align: center;
 }
+
+.stock-list-input input{
+  margin-right: 10px;
+}
 .stock-list-container {
   width:80%;
   height:60%;
@@ -63,6 +67,7 @@ li a:hover {
   margin-right:10%;
   text-align:left;
   margin-top: 30px;
+  border: 1px solid black;
 }
 
 .stock-row {
@@ -86,4 +91,96 @@ li a:hover {
 
 .stock-item-buttons:hover {
   background: #343434;
+}
+
+/* Details */
+
+h1 a, p a {
+  color: WhiteSmoke;
+}
+
+h1 a:hover, p a:hover {
+  font-weight:bold;
+}
+
+.basic-details {
+  border-bottom: 1px solid black;
+  text-align:center;
+}
+.basic-details img{
+  position:absolute;
+  left:0;
+  top: 47px;
+}
+
+.details {
+  text-align:center;
+  margin-top:10px;
+}
+.details input {
+  margin-right: 10px;
+}
+
+.relevant-conatiner-div span:hover{
+  font-weight: bold;
+}
+
+.chart-parent {
+  margin-top: 15px;
+}
+.chart-container-div {
+  border-bottom: 1px solid black;
+  padding-bottom: 20px;
+}
+
+.news-item {
+  border-bottom: 1px solid black;
+  padding-bottom: 10px;
+}
+.chart-div, .news-container-inner-div, .relevant-container-inner-div {
+  margin-left: 20px;
+}
+.news-container-div {
+  box-sizing:border-box;
+  border-bottom: 1px solid black;
+  padding-bottom: 20px;
+}
+
+.chart-div form {
+  margin-left: 300px;
+}
+.chart-div select {
+  margin-right: 10px;
+}
+
+/* Movers */
+
+.movers-outer-div {
+  display: flex;
+}
+
+.movers-outer-div {
+  text-align:center;
+}
+
+.losers-container-outer-div, .gainers-container-outer-div {
+  width: 40%;
+  margin: 20px 0 10% 5%;
+  border-radius:10px;
+
+}
+.losers-container-outer-div {
+  box-shadow: 0px 5px 10px 10px #380000;
+}
+
+.gainers-container-outer-div {
+  box-shadow: 0px 5px 10px 10px #003800;
+}
+
+.losers-container-div, .gainers-container-div{
+  border-top:1px solid black;
+}
+
+.mover-item {
+  border-bottom: 1px solid black;
 }
