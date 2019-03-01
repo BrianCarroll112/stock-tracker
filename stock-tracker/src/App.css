@@ -1,7 +1,7 @@
 body {
   margin:0;
   background: #505050;
-  color: white;
+  color: WhiteSmoke;
 }
 
 .relevant-ticker {
@@ -68,6 +68,7 @@ li a:hover {
   text-align:left;
   margin-top: 30px;
   border: 1px solid black;
+  margin-bottom:5%;
 }
 
 .stock-row {
@@ -115,7 +116,7 @@ h1 a:hover, p a:hover {
 
 .details {
   text-align:center;
-  margin-top:10px;
+  margin-top:20px;
 }
 .details input {
   margin-right: 10px;
@@ -157,15 +158,13 @@ h1 a:hover, p a:hover {
 
 .movers-outer-div {
   display: flex;
-}
-
-.movers-outer-div {
+  justify-content: space-around;
   text-align:center;
 }
 
 .losers-container-outer-div, .gainers-container-outer-div {
-  width: 40%;
-  margin: 20px 0 10% 5%;
+  width: 45%;
+  margin: 20px 0 10% 0;
   border-radius:10px;
 
 }
@@ -183,4 +182,36 @@ h1 a:hover, p a:hover {
 
 .mover-item {
   border-bottom: 1px solid black;
+}
+
+/* IPO */
+
+.ipo-container-div {
+  padding: 2% 5% 0 5%;
+  text-align:center;
+}
+h2 a {
+  color:WhiteSmoke;
+}
+h2 a:hover {
+  font-weight:bolder;
+}
+
+.ipo-container-div p {
+  text-align:left;
+}
+
+.ipo-div {
+  border-bottom: 1px solid black;
+  margin-bottom: 7%;
+}
+.ipo-shares-div {
+  text-align:left;
+}
+.ipo-shares-div span {
+  margin-right:30px;
+}
+
+h1 a:hover {
+  font-weight: bolder;
 }

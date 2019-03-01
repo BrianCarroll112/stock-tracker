@@ -168,6 +168,7 @@ class App extends Component {
  async handleActiveButtonColor(e) {
     const clicked = e.target;
     const buttons = document.querySelectorAll('li a');
+
     await buttons.forEach((but) => {
       but.style.backgroundColor = '#181818'
     })
